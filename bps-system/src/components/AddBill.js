@@ -34,30 +34,44 @@ function AddBillForm() {
     } finally {
       setLoading(false);
     }
-
-    
   };
 
   return (
-    <form onSubmit={handleSubmit} className="needs-validation" noValidate>
-  {error && <div className="alert alert-danger">{error}</div>}
-  <div className="mb-3">
-    <label htmlFor="name" className="form-label">Name</label>
-    <input type="text" className="form-control form-control-sm" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
-    <div className="invalid-feedback">Please provide a name.</div>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="amount" className="form-label">Amount</label>
-    <input type="number" className="form-control form-control-sm" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount" required />
-    <div className="invalid-feedback">Please provide a valid amount.</div>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="dueDate" className="form-label">Due Date</label>
-    <input type="date" className="form-control form-control-sm" id="dueDate" value={dueDate} onChange={(e) => setDueDate(e.target.value)} placeholder="Due Date" required />
-    <div className="invalid-feedback">Please provide a due date.</div>
-  </div>
-  <button type="submit" className="btn btn-primary" disabled={loading}>Add Bill</button>
-</form>
+    <form onSubmit={handleSubmit} className="needs-validation d-flex justify-content-center">
+      {error && <div className="alert alert-danger">{error}</div>}
+      <div className="row">
+        <div className="col-sm-12 col-md-6">
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input type="text" className="form-control form-control-sm" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
+            <div className="invalid-feedback">Please provide a name.</div>
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-sm-12 col-md-6">
+          <div className="mb-3">
+            <label htmlFor="amount" className="form-label">Amount</label>
+            <input type="number" className="form-control form-control-sm" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount" required />
+            <div className="invalid-feedback">Please provide a valid amount.</div>
+          </div>
+        </div>
+        </div>
+        <div className="col-sm-12 col-md-6">
+          <div className="mb-3">
+            <label htmlFor="dueDate" className="form-label">Due Date</label>
+            <input type="date" className="form-control form-control-sm" id="dueDate" value={dueDate} onChange={(e) => setDueDate(e.target.value)} placeholder="Due Date" required />
+            <div className="invalid-feedback">Please provide a due date.</div>
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-sm-12 col-md-6">
+          <div className="mb-3">
+            <button type="submit" className="btn btn-primary" disabled={loading}>Add Bill</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
   );
 }
 

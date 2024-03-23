@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { Link } from 'react-router-dom';
 
 function ViewBills() {
   const [bills, setBills] = useState([]);
@@ -24,7 +25,7 @@ function ViewBills() {
     };
 
     fetchBills();
-  }, []); // Empty dependency array ensures useEffect runs only once on component mount
+  }, []);
 
   const handleDelete = async (billId) => {
     try {
@@ -48,7 +49,7 @@ function ViewBills() {
               <div className="card-body">
                 <h5 className="card-title">{bill.name}</h5>
                 <p className="card-text">Amount: {bill.amount}</p>
-                
+                <Link to={`/payment-options/${bill.id}`} className="btn btn-primary">Pay Bill</Link>
                 <button className="btn btn-danger" onClick={() => handleDelete(bill.id)}>Delete</button>
               </div>
             </div>
