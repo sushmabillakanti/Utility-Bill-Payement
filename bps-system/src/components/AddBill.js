@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 function AddBill() {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ function AddBill() {
   const [utilities, setUtilities] = useState([]);
   const [selectedUtility, setSelectedUtility] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUtilities = async () => {
@@ -57,6 +59,7 @@ function AddBill() {
       setDueDate('');
       setSelectedUtility('');
       setError('');
+      navigate('/viewbills');
     } catch (error) {
       console.error('Error adding bill: ', error);
       setError('Failed to add bill. Please try again later.');

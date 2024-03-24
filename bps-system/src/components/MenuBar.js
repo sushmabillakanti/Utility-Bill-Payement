@@ -30,7 +30,7 @@ const MenuBar = () => {
             <div className="container-fluid">
                 <Link className="navbar-brand" to="#" >
                     <img height="45px" width="50px" title="Home"
-                        src="https://img.freepik.com/free-vector/hand-drawn-money-logo-design_23-2150931748.jpg?t=st=1711267458~exp=1711271058~hmac=f71da3a31ccedcc6a2a2dcb5bd1643772d089766dc2d28e9157ddedf6565e3bc&w=740"
+                        src="https://media.istockphoto.com/id/1764859152/photo/3d-realistic-loan-money-icon-3d-icon-isolated-on-white.jpg?s=1024x1024&w=is&k=20&c=VQ0dA69FdiStp-FdTKrcLMB3SlKxB1nU4nZgzn-OtNw="
                         alt="deloitte logo" />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
