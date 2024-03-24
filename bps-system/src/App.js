@@ -1,12 +1,12 @@
 import './App.css';
-import ViewBills from './components/ViewBills';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import AppRoutes from './components/AppRoutes';
+
 
 function App() {
   return (
     <div className="App">
-      {/* <AddBillForm/> */}
-      <ViewBills/>
+        <AppRoutes/>
     </div>
   );
 }

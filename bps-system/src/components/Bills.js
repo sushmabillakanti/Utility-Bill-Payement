@@ -3,7 +3,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 
-function ViewBills() {
+function Bills() {
   const [bills, setBills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -60,4 +60,4 @@ function ViewBills() {
   );
 }
 
-export default ViewBills;
+export default Bills;
