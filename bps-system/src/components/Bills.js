@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
+import 'firebase/firestore';
 
 function Bills() {
   const [bills, setBills] = useState([]);
@@ -49,7 +50,7 @@ function Bills() {
               <div className="card-body">
                 <h5 className="card-title">{bill.name}</h5>
                 <p className="card-text">Amount: {bill.amount}</p>
-                <Link to={`/payment-options/${bill.id}`} className="btn btn-primary">Pay Bill</Link>
+                <Link to={`/payment-option/${bill.id}?amount=${bill.amount}`}>Pay Bill</Link>
                 <button className="btn btn-danger" onClick={() => handleDelete(bill.id)}>Delete</button>
               </div>
             </div>
