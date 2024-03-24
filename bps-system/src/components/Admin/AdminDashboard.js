@@ -15,6 +15,9 @@ const AdminDashboard = () => {
                 <Link to="/Adminpaymentmethods" className="list-group-item list-group-item-action">
                     Manage Payment Methods
                 </Link>
+                <Link to="/AddUtility" className="list-group-item list-group-item-action">
+                    Manage Utilities
+                </Link>
             </div>
         </div>
     );

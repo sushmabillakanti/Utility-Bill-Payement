@@ -5,16 +5,17 @@ import { Link } from 'react-router-dom';
 
 function Bills() {
   const [bills, setBills] = useState([]);
+  const [utilities, setUtilities] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  
   useEffect(() => {
     const fetchBills = async () => {
       try {
         setLoading(true);
         setError('');
-        const querySnapshot = await getDocs(collection(db, 'bills'));
-        const billsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const billsSnapshot = await getDocs(collection(db, 'bills'));
+        const billsData = billsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setBills(billsData);
       } catch (error) {
         console.error('Error fetching bills: ', error);
@@ -24,7 +25,21 @@ function Bills() {
       }
     };
 
+    const fetchUtilities = async () => {
+      try {
+        const utilitiesSnapshot = await getDocs(collection(db, 'utilities'));
+        const utilitiesData = utilitiesSnapshot.docs.reduce((acc, doc) => {
+          acc[doc.id] = doc.data();
+          return acc;
+        }, {});
+        setUtilities(utilitiesData);
+      } catch (error) {
+        console.error('Error fetching utilities: ', error);
+        setError('Failed to fetch utilities. Please try again later.');
+      }
+    };
     fetchBills();
+    fetchUtilities();
   }, []);
 
   const handleDelete = async (billId) => {
@@ -40,17 +55,23 @@ function Bills() {
   return (
     <div className="container mt-4">
       <h2 className="mb-4">All Bills</h2>
+      <Link to='/AddBill' className="btn btn-primary">Add New Bill</Link>
       <div className="row">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {bills.map(bill => (
           <div key={bill.id} className="col-md-4 mb-4">
             <div className="card">
+              <img src={utilities[bill.utilityId]?.imageUrl} className="card-img-top" alt={utilities[bill.utilityId]?.name} />
               <div className="card-body">
                 <h5 className="card-title">{bill.name}</h5>
                 <p className="card-text">Amount: {bill.amount}</p>
+                <div>
                 <Link to={`/payment-options/${bill.id}`} className="btn btn-primary">Pay Bill</Link>
+                <br/>
+                <br/>
                 <button className="btn btn-danger" onClick={() => handleDelete(bill.id)}>Delete</button>
+              </div>
               </div>
             </div>
           </div>
