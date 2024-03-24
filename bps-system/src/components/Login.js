@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import { useNavigate, Link } from 'react-router-dom';
+import { auth } from '../firebase';
+import { db } from '../firebase';
+import { collection, getDocs,query,where } from 'firebase/firestore';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -18,9 +20,18 @@ const Login = () => {
             if (email === 'admin@gmail.com' && password === 'abc') {
                 navigate('/admin');
             }
+            const usersRef = collection(db, 'users');
+            const q = query(usersRef, where('email', '==', email));
+            const querySnapshot = await getDocs(q);
 
-            await firebase.auth().signInWithEmailAndPassword(email, password);
-
+            if (querySnapshot.empty) {
+                setError('User not found');
+                return;
+            }
+            else{
+                navigate('/viewbills');
+            }
+            await signInWithEmailAndPassword(auth, email, password); // Ensure to await the signInWithEmailAndPassword function
             setIsLoggedIn(true);
             setSuccessMessage('Login successful');
             setError('');
@@ -31,12 +42,15 @@ const Login = () => {
 
     const handleLogout = async () => {
         try {
-            await firebase.auth().signOut();
-            setIsLoggedIn(false);
-            setSuccessMessage('Logout successful');
-            setError('');
+            await signOut(auth); // Call signOut function with the auth object
+            setIsLoggedIn(false); // Update isLoggedIn state
+            setSuccessMessage('Logout successful'); // Set success message
+            setError(''); // Clear any previous errors
+            navigate('/login');
         } catch (error) {
-            setError(error.message);
+            // Log the error for debugging purposes
+            console.error('Logout Error:', error);
+            setError(error.message); // Set error message
         }
     };
 
@@ -88,6 +102,7 @@ const Login = () => {
                                     {successMessage && <p className="text-success">{successMessage}</p>}
                                 </div>
                             </div>
+                            <Link to="/register">Register New Account</Link>
                         </div>
                     </div>
                 </div>

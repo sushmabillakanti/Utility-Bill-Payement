@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/compat/app'; // Import firebase from compat/app
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebase';
+import { collection,addDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +12,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUpAndStoreUserData = async (e) => {
     e.preventDefault();
@@ -20,16 +23,17 @@ const Register = () => {
       }
 
       // Step 1: Create user in Firebase Authentication
-      const userCredential = await db.auth().createUserWithEmailAndPassword(email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth,email, password);
       const user = userCredential.user;
+      
 
-      // Step 2: Store user email and password in Firestore
-      await db.collection('users').doc(user.uid).set({
+      await addDoc(collection(db, "users"), {
         email: user.email,
-        password: password, // Store password
+        password: password
       });
 
       setSuccessMessage('User signed up and data stored successfully');
+      navigate('/viewbills');
       setError(null); // Clear any previous error
     } catch (error) {
       setSuccessMessage('');

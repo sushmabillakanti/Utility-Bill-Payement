@@ -1,7 +1,30 @@
 import { Link } from "react-router-dom";
- 
+import { useState,useEffect} from "react";
+import { auth } from "../firebase";
+
+
 const MenuBar = () => {
- 
+    const [userEmail, setUserEmail] = useState('');
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    // Use Firebase Auth state listener to track user authentication state
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in
+                setUserEmail(user.email);
+                setIsUserLoggedIn(true);
+            } else {
+                // User is signed out
+                setUserEmail('');
+                setIsUserLoggedIn(false);
+            }
+        });
+
+        // Clean up listener on unmount
+        return () => unsubscribe();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -19,23 +42,13 @@ const MenuBar = () => {
                             <Link className="nav-link active" to="/login">Login</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" to="pay">Payment</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="Dashboard">DashBoard</Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link active" to="logout">Logout</Link>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search a payment.." />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
     );
 };
- 
+
 export default MenuBar;
