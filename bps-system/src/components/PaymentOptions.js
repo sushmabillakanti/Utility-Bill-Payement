@@ -12,7 +12,7 @@ const PaymentOptions = () => {
     const [error, setError] = useState('');
     const [billAmount, setBillAmount] = useState('');
     const [userId, setUserId] = useState('');
-    const [billname,setbillName]= useState('');
+    const [billname, setbillName] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const PaymentOptions = () => {
 
             const billDocRef = doc(db, 'bills', billId);
             const billSnapshot = await getDoc(billDocRef);
-            
+
             if (billSnapshot.exists()) {
                 const billData = billSnapshot.data();
                 setBillAmount(billData.amount);
@@ -82,7 +82,7 @@ const PaymentOptions = () => {
                 billId: billId,
                 paymentType: paymentType,
                 amount: parseFloat(billAmount),
-                name:billname,
+                name: billname,
             });
             console.log('Payment added successfully');
 

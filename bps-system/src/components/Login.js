@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { auth,db } from '../firebase';
+import { auth, db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -41,7 +41,7 @@ const Login = () => {
         try {
             await auth.signOut();
             setIsLoggedIn(false); // Update isLoggedIn state upon successful logout
-            navigate('/login'); 
+            navigate('/login');
         } catch (error) {
             console.error('Error logging out:', error);
             // Handle logout error if necessary

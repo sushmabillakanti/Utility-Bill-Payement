@@ -49,8 +49,8 @@ function AddBill() {
         name,
         amount: parseFloat(amount), // Parse amount as float
         dueDate: new Date(dueDate), // Convert dueDate to Date object
-        utilityId: selectedUtility, 
-        userId:userId,// Add selected utility ID to the bill
+        utilityId: selectedUtility,
+        userId: userId,// Add selected utility ID to the bill
       });
       console.log('Bill added with ID: ', docRef.id);
       // Clear form after successful submission

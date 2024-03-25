@@ -23,7 +23,7 @@ const ExpensesChart = () => {
 
         // Process expenses data to extract required information (e.g., amount)
         const processedExpensesData = expenses.map(expense => ({
-          name: expense.name, 
+          name: expense.name,
           amount: expense.amount,
         }));
 

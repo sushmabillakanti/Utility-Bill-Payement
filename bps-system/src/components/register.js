@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase';
-import { collection,addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
@@ -23,9 +23,9 @@ const Register = () => {
       }
 
       // Step 1: Create user in Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth,email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      
+
 
       await addDoc(collection(db, "users"), {
         email: user.email,
@@ -102,7 +102,7 @@ const Register = () => {
         </div>
       </form>
       <div>{error && <p>{error}</p>}
-      {successMessage && <h4>{successMessage}</h4>}</div>
+        {successMessage && <h4>{successMessage}</h4>}</div>
     </div>
   );
 };

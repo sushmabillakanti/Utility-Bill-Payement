@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
- 
+
 const Home = () => {
- 
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -21,11 +21,11 @@ const Home = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" to="register">Register</Link>
                         </li>
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
     );
 };
- 
+
 export default Home;

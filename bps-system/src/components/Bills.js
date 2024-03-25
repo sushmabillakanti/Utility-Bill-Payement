@@ -60,9 +60,9 @@ function Bills() {
   return (
     <div className="container mt-4">
       <h2 className="mb-4">Bills</h2>
-      <Link to='/AddBill' className="btn btn-primary">Add New Bill</Link><br/><br/>
+      <Link to='/AddBill' className="btn btn-primary">Add New Bill</Link><br /><br />
       <Link to='/Sales' className='btn btn-primary'>View Expenses</Link>
-      <br/><br/>
+      <br /><br />
       <div className="row">
 
         {loading && <p>Loading...</p>}

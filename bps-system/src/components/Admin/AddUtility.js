@@ -37,22 +37,22 @@ const ViewAllUtilities = () => {
 
     return (
         <div>
-        <h2 className="text-center my-4">All Utilities</h2>
-        {error && <p className="text-danger">{error}</p>}
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-            {utilities.map(utility => (
-                <div key={utility.id} className="col">
-                    <Card> 
-                        <Card.Img style={{ height: '200px' }} variant="top" src={utility.imageUrl} alt={utility.name} />
-                        <Card.Body>
-                            <Card.Title>{utility.name}</Card.Title>
-                            <Button variant="danger" onClick={() => deleteUtility(utility.id)}>Delete</Button>
-                        </Card.Body>
-                    </Card>
-                </div>
-            ))}
+            <h2 className="text-center my-4">All Utilities</h2>
+            {error && <p className="text-danger">{error}</p>}
+            <div className="row row-cols-1 row-cols-md-3 g-4">
+                {utilities.map(utility => (
+                    <div key={utility.id} className="col">
+                        <Card>
+                            <Card.Img style={{ height: '200px' }} variant="top" src={utility.imageUrl} alt={utility.name} />
+                            <Card.Body>
+                                <Card.Title>{utility.name}</Card.Title>
+                                <Button variant="danger" onClick={() => deleteUtility(utility.id)}>Delete</Button>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                ))}
+            </div>
         </div>
-    </div>
     );
 };
 

@@ -23,16 +23,16 @@ const AppRoutes = () => {
                     <Routes >
                         <Route exact path='login' element={<Login />} />
                         <Route exact path='admin' element={<AdminDashboard />} />
-                        <Route exact path='logout' element={<Login/>}></Route>
+                        <Route exact path='logout' element={<Login />}></Route>
                         <Route exact path='users' element={<ManageUsers />} />
                         <Route exact path='Adminpaymentmethods' element={<PaymentMethods />} />
                         <Route exact path='register' element={<Register />} />
                         <Route exact path='viewbills' element={<Bills />} />
                         <Route exact path='AddUtility' element={<AddUtility />}></Route>
-                        <Route exact path= 'AddBill' element={<AddBill/>}></Route>
-                        <Route exact path = 'PaymentOptions/:billId' element={<PaymentOptions/>}></Route>
-                        <Route exact path = 'Sales' element={<Sales/>}></Route>
-                        <Route exact path = '/*' element={<Page404/>} />
+                        <Route exact path='AddBill' element={<AddBill />}></Route>
+                        <Route exact path='PaymentOptions/:billId' element={<PaymentOptions />}></Route>
+                        <Route exact path='Sales' element={<Sales />}></Route>
+                        <Route exact path='/*' element={<Page404 />} />
                     </Routes>
                 </div>
             </BrowserRouter>

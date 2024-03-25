@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
-import { collection, getDocs, deleteDoc, doc, updateDoc ,addDoc} from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, updateDoc, addDoc } from 'firebase/firestore';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -30,25 +30,25 @@ const ManageUsers = () => {
   }, []);
 
   const editUser = async () => {
-      try {
-          await updateDoc(doc(db, 'users', editUserId), { email: editUserEmail });
-          
-          setUsers(users.map(user => {
-              if (user.id === editUserId) {
-                  return { ...user, email: editUserEmail };
-              }
-              return user;
-          }));
-  
-          setEditUserId('');
-          setEditUserEmail('');
-          setError('');
-          setIsEditing(false);
-      } catch (error) {
-          setError(error.message);
-      }
+    try {
+      await updateDoc(doc(db, 'users', editUserId), { email: editUserEmail });
+
+      setUsers(users.map(user => {
+        if (user.id === editUserId) {
+          return { ...user, email: editUserEmail };
+        }
+        return user;
+      }));
+
+      setEditUserId('');
+      setEditUserEmail('');
+      setError('');
+      setIsEditing(false);
+    } catch (error) {
+      setError(error.message);
+    }
   };
-  
+
 
   const deleteUser = async (userId) => {
     try {
