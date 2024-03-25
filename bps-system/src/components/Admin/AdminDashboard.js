@@ -5,7 +5,7 @@ const AdminDashboard = () => {
     return (
         <>
         <h2>Admin Dashboard</h2>
-        <div style={{ marginLeft: '250px' }}>
+        <div style={{ marginLeft: '300px' }}>
             <div className="card mb-3" style={{ maxWidth: '540px' }}>
                 <div className="row g-1">
                     <div className="col-md-4">
