@@ -10,6 +10,7 @@ import AddUtility from './Admin/AddUtility';
 import AddBill from './AddBill';
 import PaymentOptions from './PaymentOptions';
 import Sales from './Sales';
+import Page404 from './Page404';
 
 const AppRoutes = () => {
     return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
                         <Route exact path= 'AddBill' element={<AddBill/>}></Route>
                         <Route exact path = 'PaymentOptions/:billId' element={<PaymentOptions/>}></Route>
                         <Route exact path = 'Sales' element={<Sales/>}></Route>
+                        <Route exact path = '/*' element={<Page404/>} />
                     </Routes>
                 </div>
             </BrowserRouter>

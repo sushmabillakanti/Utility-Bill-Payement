@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore'; // Import query and where
+import { db, auth } from '../firebase';
 import { Link } from 'react-router-dom';
-import 'firebase/firestore';
 
 function Bills() {
   const [bills, setBills] = useState([]);
@@ -13,9 +12,14 @@ function Bills() {
   useEffect(() => {
     const fetchBills = async () => {
       try {
+        const currentUser = auth.currentUser;
+        if (!currentUser || !currentUser.uid) {
+          throw new Error('User not authenticated or UID not found');
+        }
         setLoading(true);
         setError('');
-        const billsSnapshot = await getDocs(collection(db, 'bills'));
+        const q = query(collection(db, 'bills'), where('userId', '==', currentUser.uid)); // Use query and where
+        const billsSnapshot = await getDocs(q);
         const billsData = billsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setBills(billsData);
       } catch (error) {

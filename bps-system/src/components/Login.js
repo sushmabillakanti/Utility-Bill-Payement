@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { auth } from '../firebase';
-import { db } from '../firebase';
-import { collection, getDocs,query,where } from 'firebase/firestore';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth,db } from '../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const Login = () => {
@@ -28,12 +27,10 @@ const Login = () => {
                 setError('User not found');
                 return;
             }
-            else{
-                navigate('/viewbills');
-            }
-            await signInWithEmailAndPassword(auth, email, password); // Ensure to await the signInWithEmailAndPassword function
+            await signInWithEmailAndPassword(auth, email, password);
             setIsLoggedIn(true);
             setSuccessMessage('Login successful');
+            navigate('/viewbills');
             setError('');
         } catch (error) {
             setError(error.message);
@@ -42,15 +39,12 @@ const Login = () => {
 
     const handleLogout = async () => {
         try {
-            await signOut(auth); // Call signOut function with the auth object
-            setIsLoggedIn(false); // Update isLoggedIn state
-            setSuccessMessage('Logout successful'); // Set success message
-            setError(''); // Clear any previous errors
-            navigate('/login');
+            await auth.signOut();
+            setIsLoggedIn(false); // Update isLoggedIn state upon successful logout
+            navigate('/login'); 
         } catch (error) {
-            // Log the error for debugging purposes
-            console.error('Logout Error:', error);
-            setError(error.message); // Set error message
+            console.error('Error logging out:', error);
+            // Handle logout error if necessary
         }
     };
 
